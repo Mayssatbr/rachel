@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8A91BC">
+
+<EditText
+    android:id="@+id/Service_Name"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:hint="Service name"
+    android:textColor="#050505" />
+
+
+<Button
+    android:id="@+id/addButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/Service_Name"
+    android:layout_centerInParent="true"
+    android:layout_weight="1"
+    android:background="#A57272"
+    android:text="Add" />
+
+
+<TextView
+    android:id="@+id/service_list"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:layout_below="@id/addButton"
+    android:background="#DCD4D4"
+    android:text="Services"
+    android:textColor="#0C0C0C"
+    android:textSize="18sp" />
+
+<ListView
+    android:id="@+id/listViewProducts"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/service_list"></ListView>
+
+</RelativeLayout>
