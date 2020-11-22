@@ -60,31 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         Submit_employee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mail.getText().toString().isEmpty()) {
-                    mail.setError("enter your mail address");
-                }
-                if (!(mail.getText().toString().trim().matches(emailPattern))) {
-                    mail.setError("invalid mail address");
-                }
-
-
-                if (userName.length() == 0) {
-                    userName.setError("Enter Username");
-                }
-                if (password.length() == 0) {
-                    password.setError("Enter password");
-                }
-                if (FirstName.length() == 0) {
-                    FirstName.setError("Enter First name");
-                }
-                if (LastName.length() == 0) {
-                    LastName.setError("Enter Last name");
-                }
-                if ((!(mail.getText().toString().isEmpty())) && (mail.getText().toString().trim().matches(emailPattern)) && (userName.length() != 0) && (password.length() != 0) && (FirstName.length() != 0) && (LastName.length() != 0) && (mail.length() != 0)) {
-                    register();
-
-
-                }
+               register();
 
 
             }
@@ -95,34 +71,13 @@ public class SignUpActivity extends AppCompatActivity {
         Submit_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mail.getText().toString().isEmpty()) {
-                    mail.setError("enter your mail");
-                } else {
-                    if (!(mail.getText().toString().trim().matches(emailPattern))) {
-                        mail.setError("invalid mail address");
-                    }
-                }
-
-
-                if (userName.length() == 0) {
-                    userName.setError("Enter Username");
-                }
-                if (password.length() == 0) {
-                    password.setError("Enter password");
-                }
-                if (FirstName.length() == 0) {
-                    FirstName.setError("Enter First name");
-                }
-                if (LastName.length() == 0) {
-                    LastName.setError("Enter Last name");
-                }
-
-
-                if ((!(mail.getText().toString().isEmpty())) && (mail.getText().toString().trim().matches(emailPattern)) && (userName.length() != 0) && (password.length() != 0) && (FirstName.length() != 0) && (LastName.length() != 0) && (mail.length() != 0)) {
-                }
-
-
+                register();
             }
+
+
+
+
+
         });
         Sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,14 +93,16 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+
+
     private void register() {
         if (mail.getText().toString().isEmpty()) {
             mail.setError("enter your mail");
-        } else {
-            if (!(mail.getText().toString().trim().matches(emailPattern))) {
-                mail.setError("invalid mail address");
-            }
         }
+        if (!(mail.getText().toString().trim().matches(emailPattern))) {
+            mail.setError("invalid mail address");
+        }
+
 
 
         if (userName.length() == 0) {

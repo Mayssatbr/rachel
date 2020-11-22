@@ -47,12 +47,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin_client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 login();
-                if(test==true){
-                    Intent intent = new Intent(MainActivity.this, Welcome_customer.class);
-                    startActivity(intent);
-                    finish();
-                }
 
             }
         });
@@ -62,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
-                if(test==true){
-                    Intent intent = new Intent(MainActivity.this, Welcome_employee.class);
-                    startActivity(intent);
-                    finish();
-                }
-
             }
             
 
@@ -76,16 +66,46 @@ public class MainActivity extends AppCompatActivity {
         Sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, DashboardActivity.class);
+                Intent intent=new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 finish();
 
             }
         });
+        btn_Admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login_adm();
+
+            }
+        });
+
+    }
+    private boolean login_adm() {
+
+            firebaseAuth.signInWithEmailAndPassword(mail.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        test=true;
+                        Toast.makeText(MainActivity.this, "Successfully connected", Toast.LENGTH_LONG);
+                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+                        Toast.makeText(MainActivity.this, "Error!can't connect!!", Toast.LENGTH_LONG);
+                    }
+                }
+
+            });
+
+        return  test;
+
 
     }
 
-    private void login() {
+    private boolean login() {
 
         if(!(mail.getText().toString().isEmpty())&&(mail.getText().toString().trim().matches(emailPattern))&&(password.length()!=0)) {
             firebaseAuth.signInWithEmailAndPassword(mail.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -94,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         test=true;
                         Toast.makeText(MainActivity.this, "Successfully connected", Toast.LENGTH_LONG);
+                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                        finish();
 
                     } else {
                         Toast.makeText(MainActivity.this, "Error!can't connect!!", Toast.LENGTH_LONG);
@@ -102,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
 
             });
         }
+        return  test;
+
 
     }
 
