@@ -20,6 +20,9 @@
         <activity android:name=".Welcome_employee"></activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".Admin_Options"></activity>
+        <activity android:name=".Services"></activity>
+
     </application>
 
 </manifest>

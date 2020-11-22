@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private FirebaseAuth firebaseAuth;
     private TextView Sign_up;
-    boolean test;
+
 
 
     @Override
