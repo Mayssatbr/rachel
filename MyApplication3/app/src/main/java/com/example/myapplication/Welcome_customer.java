@@ -12,6 +12,7 @@ public class Welcome_customer extends AppCompatActivity {
     private static final String TAG = "Welcome_cutomer";
     TextView text;
     TextView logout;
+    Button services;
 
 
 
@@ -23,6 +24,7 @@ public class Welcome_customer extends AppCompatActivity {
         logout=findViewById(R.id.logout);
         Bundle name=getIntent().getExtras();
         text=(TextView)findViewById(R.id.text);
+        services=(Button)findViewById(R.id.services);
         if (name!=null) {
             text.setText(name.getString("userName"));
         }
@@ -30,6 +32,15 @@ public class Welcome_customer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Welcome_customer.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        services.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Welcome_customer.this,Services.class);
                 startActivity(intent);
                 finish();
 

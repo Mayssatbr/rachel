@@ -11,10 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_Admin;
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    private FirebaseAuth firebaseAuth;
+
     private TextView Sign_up;
 
 
@@ -39,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin_client=(Button) findViewById(R.id.customerbt);
         btnLogin_employee=(Button) findViewById(R.id.employeebt);
         btn_Admin=(Button) findViewById(R.id.bt_Administrator);
-        firebaseAuth= FirebaseAuth.getInstance();
+
         Sign_up = (TextView) findViewById(R.id.sign_up);
 
 
@@ -47,8 +43,21 @@ public class MainActivity extends AppCompatActivity {
         btnLogin_client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_customer();
+                if (mail.getText().toString().isEmpty()) {
+                    mail.setError("enter your mail");
+                }
+                if (!(mail.getText().toString().trim().matches(emailPattern))) {
+                    mail.setError("invalid mail address");
+                }
 
+                if (password.length() == 0) {
+                    password.setError("Enter password");
+                }
+                if(((mail.getText().toString().isEmpty())&&(mail.getText().toString().trim().matches(emailPattern))&&(password.length() == 0))) {
+                    Intent intent = new Intent(MainActivity.this, Welcome_customer.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -56,7 +65,21 @@ public class MainActivity extends AppCompatActivity {
         btnLogin_employee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_employee();
+                if (mail.getText().toString().isEmpty()) {
+                    mail.setError("enter your mail");
+                }
+                if (!(mail.getText().toString().trim().matches(emailPattern))) {
+                    mail.setError("invalid mail address");
+                }
+
+                if (password.length() == 0) {
+                    password.setError("Enter password");
+                }
+                if(((mail.getText().toString().isEmpty())&&(mail.getText().toString().trim().matches(emailPattern))&&(password.length() == 0))) {
+                    Intent intent = new Intent(MainActivity.this, Welcome_employee.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
             
 
@@ -74,80 +97,12 @@ public class MainActivity extends AppCompatActivity {
         btn_Admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_adm();
+                Intent intent=new Intent(MainActivity.this, Admin_Options.class);
+                startActivity(intent);
+                finish();
 
             }
         });
-
-    }
-
-    private void login_adm() {
-
-            firebaseAuth.signInWithEmailAndPassword(mail.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "Successfully connected", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(MainActivity.this,Admin_Options.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Toast.makeText(MainActivity.this, "Error!can't connect!!", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            });
-
-
-    }
-
-    private void login_employee() {
-
-
-
-            firebaseAuth.signInWithEmailAndPassword(mail.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-
-                        Toast.makeText(MainActivity.this, "Successfully connected", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(MainActivity.this, Welcome_employee.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Toast.makeText(MainActivity.this, "Error!can't connect!!", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            });
-
-
-
-    }
-    private void login_customer() {
-
-
-
-            firebaseAuth.signInWithEmailAndPassword(mail.getText().toString(), password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-
-                        Toast.makeText(MainActivity.this, "Successfully connected", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(MainActivity.this, Welcome_customer.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Toast.makeText(MainActivity.this, "Error!can't connect!!", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            });
-
-
 
     }
 

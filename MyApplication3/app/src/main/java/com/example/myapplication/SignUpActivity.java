@@ -15,11 +15,7 @@ import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -34,13 +30,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     Button Submit_customer, Submit_employee;
 
-    private FirebaseAuth firebaseAuth;
+
 
 
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-
+    private Intent intent;
 
 
     @Override
@@ -56,16 +51,14 @@ public class SignUpActivity extends AppCompatActivity {
         Submit_customer = (Button) findViewById(R.id.bt_customer);
         Submit_employee = (Button) findViewById(R.id.bt_employee);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+
         Sign_in = (TextView) findViewById(R.id.sign_in);
 
 
         Submit_employee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               register();
-
+                register();
 
             }
 
@@ -75,8 +68,8 @@ public class SignUpActivity extends AppCompatActivity {
         Submit_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 register();
+
             }
 
         });
@@ -119,23 +112,13 @@ public class SignUpActivity extends AppCompatActivity {
         if (LastName.length() == 0) {
             LastName.setError("Enter Last name");
         }
+        if(((mail.getText().toString().isEmpty())&&(mail.getText().toString().trim().matches(emailPattern))&&(userName.length() == 0)&&(password.length() == 0)&&(LastName.length() == 0))){
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
-        firebaseAuth.createUserWithEmailAndPassword(mail.getText().toString(),password.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-               if(!task.isSuccessful()){
-                   Toast.makeText(SignUpActivity.this,"Sing up failed!", Toast.LENGTH_LONG).show();
 
-               } else{
-                   Toast.makeText(SignUpActivity.this,"Successfully registred", Toast.LENGTH_LONG).show();
-                   Intent intent=new Intent(SignUpActivity.this,MainActivity.class);
-                   startActivity(intent);
-                   finish();
-
-               }
-            }
-
-        });
 
     }
 
