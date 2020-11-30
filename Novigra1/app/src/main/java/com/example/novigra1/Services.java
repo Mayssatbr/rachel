@@ -55,14 +55,19 @@ public class Services extends AppCompatActivity {
         addValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean test=false;
                 String serviceName;
                 serviceName = serviceInput.getText().toString();
 
                 if (serviceInput.length() != 0) {
                     Intent intent = new Intent(Services.this, Required_Documents.class);
                     startActivity(intent);
-                    finish();
+                    test=true;
 
+                } else {
+                    Toast.makeText(Services.this, "you must enter something in text field!", Toast.LENGTH_LONG).show();
+
+                }if(test) {
                     String text = getIntent().getStringExtra("TEXT");
                     documents.setText(text);
                     String ch = documents.getText().toString();
@@ -70,12 +75,11 @@ public class Services extends AppCompatActivity {
                     serviceInput.setText("");
                     services.clear();
                     viewData();
-                } else {
-                    Toast.makeText(Services.this, "you must enter something in text field!", Toast.LENGTH_LONG).show();
-
                 }
             }
         });
+
+
     }
 
 

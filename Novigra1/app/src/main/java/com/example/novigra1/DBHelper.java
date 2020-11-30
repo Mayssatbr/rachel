@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //will create a table that has 2 columns (email and password)
         MyDB.execSQL("create Table user(email TEXT primary key, password TEXT)");
         MyDB.execSQL("insert into user values('Admin1234@gmail.com','admin1234')");
-        String createTable = "Create Table user(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT)";
+        String createTable = "Create Table userServices(service TEXT primary key ,  documents TEXT)";
         MyDB.execSQL(createTable);
 
 
@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int oldVersion, int newVersion) {
         MyDB.execSQL("drop Table if exists user");
-
+        MyDB.execSQL("drop table if exists userServices");
         onCreate(MyDB);
     }
     //inserer les donnees dans la base de donnee
@@ -48,12 +48,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     }
-    public boolean insertData_Services(String name, String service){
+    public boolean insertData_Services(String service, String documents){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("service", service);
-        long result = db.insert("user",null,contentValues);
+        contentValues.put("service",service);
+        contentValues.put("documents", documents);
+        long result = db.insert("userServices",null,contentValues);
         if(result == -1){
             return  false;
         }else{
@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public  Cursor viewData (){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * fROM user";
+        String query = "SELECT * FROM userServices";
         Cursor cursor = db.rawQuery(query,null);
         return cursor;
     }

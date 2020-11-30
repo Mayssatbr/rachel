@@ -21,6 +21,7 @@
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".Admin_Options"></activity>
         <activity android:name=".Services"></activity>
+        <activity android:name=".Required_Documents"></activity>
     </application>
 
 </manifest>

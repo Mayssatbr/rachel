@@ -76,7 +76,7 @@
             android:id="@+id/documents"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="UPDATE"
+
             android:textColor="#070707"
             android:textSize="30dp" />
     </LinearLayout>
