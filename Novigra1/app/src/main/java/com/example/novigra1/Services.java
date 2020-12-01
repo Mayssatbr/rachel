@@ -22,14 +22,14 @@ public class Services extends AppCompatActivity {
     TextView documents;
     ListView myListView;
     EditText serviceInput;
-    Button addValue, updateValue;
+    Button addValue, delete;
 
     ArrayList<String> services ;
     ArrayAdapter myAdapter;
 
     Integer indexVal;
     String item;
-    DBHelper db;
+    DatabaseHelper_Services db;
 
 
     @Override
@@ -41,7 +41,8 @@ public class Services extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.listView);
         serviceInput = (EditText) findViewById(R.id.editServiceName);
         addValue = (Button) findViewById(R.id.addButton);
-        db = new DBHelper(this);
+        delete = (Button) findViewById(R.id.deleteButton);
+        db = new DatabaseHelper_Services(this);
 //        updateValue = (Button) findViewById(R.id.updateButton);
 
         /*services.add("Permis de conduire");
@@ -72,6 +73,21 @@ public class Services extends AppCompatActivity {
                 }
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String serviceName;
+                serviceName = serviceInput.getText().toString();
+                boolean delete = db.deleteData(serviceName);
+                if(delete==true){
+                    Toast.makeText(Services.this, "Service Deleted", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(Services.this,"Service not deleted",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
     }
@@ -88,7 +104,7 @@ public class Services extends AppCompatActivity {
         String text = getIntent().getStringExtra("TEXT");
         documents.setText(text);
         String ch = documents.getText().toString();
-        boolean insert = db.insertData_Services(serviceName,ch);
+        boolean insert = db.insertData(serviceName,ch);
         if (insert==true){
             Toast.makeText(Services.this, "Data added", Toast.LENGTH_LONG).show();
 
