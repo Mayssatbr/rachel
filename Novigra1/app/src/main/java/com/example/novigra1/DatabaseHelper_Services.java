@@ -20,8 +20,7 @@ public class DatabaseHelper_Services extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + "(" + COL1 +"ID INTEGER primary key AUTOINCREMENT, " +
-                COL2+ " TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + "(name TEXT primary key,documents TEXT)";
 
         sqLiteDatabase.execSQL(createTable);
     }
@@ -31,11 +30,12 @@ public class DatabaseHelper_Services extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
-    public boolean insertData(String name, String id){
+    public boolean insertData(String name, String documents){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
-        contentValues.put("id",id);
+        contentValues.put("documents", documents);
+
         long result = db.insert(TABLE_NAME,null,contentValues);
         if(result == -1){
             return  false;
@@ -57,7 +57,7 @@ public class DatabaseHelper_Services extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from User_Table where name = ?",new String[]{name});
         if (cursor.getCount() > 0) {
-            long result = db.delete("userServices", "name = ?", new String[]{name});
+            long result = db.delete(TABLE_NAME, "name = ?", new String[]{name});
             if (result == -1) {
                 return false;
             } else {
