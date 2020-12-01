@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }else{
                     Boolean checkemailpass = DB.checkEmilPassword(email,pass);
-                    if((checkemailpass==true)&&(email!="Admin1234@gmail.com")){
+                    if((checkemailpass==true)&&(mail.getText().toString()!="Admin1234@gmail.com")){
                         Toast.makeText(MainActivity.this,"Sign in Successfully",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),Welcome_customer.class);
                         startActivity(intent);
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         btn_Admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = "Admin1234@gmail.com";
-                String pass = "admin1234";
+                String email = mail.getText().toString();
+                String pass = password.getText().toString();
                 if(email.equals("")||pass.equals("")){
                     Toast.makeText(MainActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }else{

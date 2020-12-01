@@ -12,8 +12,8 @@ public class DatabaseHelper_Services extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "User_Table";
 
     private static final String COL1 = "ID";
-    private static final String COL2 = "SERVICE";
-    private static final String COL3 = "DOCUMENT";
+    private static final String COL2 = "service";
+    private static final String COL3 = "ducuments";
 
 
 
@@ -23,20 +23,20 @@ public class DatabaseHelper_Services extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +  "SERVICE TEXT, "+  "DOCUMENT TEXT)";
+        String createTable = "Create table " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,service TEXT, document TEXT)";
 
         sqLiteDatabase.execSQL(createTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
+        sqLiteDatabase.execSQL(" drop table if exists " + TABLE_NAME);
     }
     public boolean insertData(String service, String documents){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, service);
-        contentValues.put(COL3, documents);
+        contentValues.put("service", service);
+        contentValues.put("document", documents);
 
         long result = db.insert(TABLE_NAME,null,contentValues);
         if(result == -1){
