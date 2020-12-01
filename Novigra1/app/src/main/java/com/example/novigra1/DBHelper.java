@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //will create a table that has 2 columns (email and password)
         MyDB.execSQL("create Table user(email TEXT primary key, password TEXT)");
         MyDB.execSQL("insert into user values('Admin1234@gmail.com','admin1234')");
-        String createTable = "Create Table userServices(service TEXT primary key ,  documents TEXT)";
+        String createTable = "Create Table userServices(service TEXT primary key , documents TEXT)";
         MyDB.execSQL(createTable);
 
 
@@ -64,10 +64,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     }
+    public boolean deleteData(String service){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from userServices  where service = ?",new String[]{service});
+        if (cursor.getCount() > 0) {
+            long result = db.delete("userServices", "name=?", new String[]{service});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
+
+
     public  Cursor viewData (){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM userServices";
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery("Select * from userServices ",null);
         return cursor;
     }
 

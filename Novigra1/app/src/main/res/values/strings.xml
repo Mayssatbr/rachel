@@ -6,12 +6,11 @@
     <string name="clear_all_label">Clear all</string>
     <string-array name="documents">
         <item>formulaire
-            <item>nom</item>
-            <item>nom</item>
-            <item>nom</item>
-            <item>nom</item>
-            <item>permis</item>
-            <item>type de permis</item>
+            <item>:nom</item>
+            <item>, prénom</item>
+            <item>, date de naissance</item>
+            <item>, adresse</item>
+            <item>, type de permis</item>
         </item>
         <item>document
             <item>preuve de domicile</item>

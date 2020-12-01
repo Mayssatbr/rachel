@@ -55,36 +55,39 @@ public class Services extends AppCompatActivity {
         addValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean test=false;
                 String serviceName;
                 serviceName = serviceInput.getText().toString();
 
                 if (serviceInput.length() != 0) {
-                    Intent intent = new Intent(Services.this, Required_Documents.class);
-                    startActivity(intent);
-                    test=true;
+
+                    AddData(serviceName);
+                    serviceInput.setText("");
+                    services.clear();
+                    viewData();
+
 
                 } else {
                     Toast.makeText(Services.this, "you must enter something in text field!", Toast.LENGTH_LONG).show();
 
-                }if(test) {
-                    String text = getIntent().getStringExtra("TEXT");
-                    documents.setText(text);
-                    String ch = documents.getText().toString();
-                    AddData(serviceName, ch);
-                    serviceInput.setText("");
-                    services.clear();
-                    viewData();
                 }
             }
         });
 
 
     }
+    private void OpenActivity(){
+        Intent intent = new Intent(Services.this, Required_Documents.class);
+        startActivity(intent);
+        finish();
+    }
 
 
 
-    private void AddData(String serviceName, String ch) {
+    private void AddData(String serviceName) {
+        OpenActivity();
+        String text = getIntent().getStringExtra("TEXT");
+        documents.setText(text);
+        String ch = documents.getText().toString();
         boolean insert = db.insertData_Services(serviceName,ch);
         if (insert==true){
             Toast.makeText(Services.this, "Data added", Toast.LENGTH_LONG).show();
