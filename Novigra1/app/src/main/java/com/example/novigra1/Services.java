@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ComponentActivity;
@@ -18,11 +19,12 @@ import androidx.core.app.ComponentActivity;
 import java.util.ArrayList;
 
 public class Services extends AppCompatActivity {
+    Toolbar toolbar;
 
-    TextView documents;
+
     ListView myListView;
     EditText serviceInput;
-    Button addValue, delete;
+    Button addValue, delete, show;
 
     ArrayList<String> services ;
     ArrayAdapter myAdapter;
@@ -36,13 +38,16 @@ public class Services extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.services);
-        documents = (TextView) findViewById(R.id.documents);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        show = (Button) findViewById(R.id.showButton);
         services = new ArrayList<>();
         myListView = (ListView) findViewById(R.id.listView);
         serviceInput = (EditText) findViewById(R.id.editServiceName);
         addValue = (Button) findViewById(R.id.addButton);
         delete = (Button) findViewById(R.id.deleteButton);
         db = new DatabaseHelper_Services(this);
+        myAdapter = new ArrayAdapter<String>(
+                Services.this, android.R.layout.simple_list_item_1, services);
 //        updateValue = (Button) findViewById(R.id.updateButton);
 
         /*services.add("Permis de conduire");
@@ -60,11 +65,13 @@ public class Services extends AppCompatActivity {
                 serviceName = serviceInput.getText().toString();
 
                 if (serviceInput.length() != 0) {
+                    services.add(serviceName);
+                    myListView.setAdapter(myAdapter);
 
-                    AddData(serviceName);
-                    serviceInput.setText("");
-                    services.clear();
-                    viewData();
+                   /* AddData(serviceName);
+                   *//* serviceInput.setText("");
+                    services.clear();*//*
+                    viewData();*/
 
 
                 } else {
@@ -88,10 +95,62 @@ public class Services extends AppCompatActivity {
 
             }
         });
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               /* item = parent.getItemAtPosition(position).toString() + " has been selected";
+                indexVal = position;
+                String text=myListView.getItemAtPosition(position).toString();
+                Toast.makeText(Services.this, ""+text, Toast.LENGTH_SHORT).show();*/
+
+                Intent intent = new Intent(Services.this, Required_Documents.class);
+                intent.putExtra("servicename",myListView.getItemAtPosition(position).toString());
+
+                startActivity(intent);
+                /*finish();
+                AddService(myListView.getItemAtPosition(position).toString());
+                   *//* serviceInput.setText("");
+                    services.clear();*//*
+                viewData();*/
+            }
+
+        });
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(services.size()!=0) {
+                    for (int i = 0; i < services.size(); i++)
+                        AddService(myListView.getChildAt(i).toString());
+                }
+                else
+                {
+                    Toast.makeText(Services.this,"Nothing to show",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Services.this,"please press button add before",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
 
 
     }
-    private void OpenActivity(){
+    private void AddService(String serviceName) {
+        Bundle bundle = getIntent().getExtras();
+        String text=bundle.getString("documents");
+
+        boolean insert = db.insertData(serviceName,text);
+        if (insert==true){
+            Toast.makeText(Services.this, "Data added", Toast.LENGTH_LONG).show();
+
+        }else{
+            Toast.makeText(Services.this, "Data not added", Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+   /* private void OpenActivity(){
         Intent intent = new Intent(Services.this, Required_Documents.class);
         startActivity(intent);
         finish();
@@ -123,23 +182,15 @@ public class Services extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 services.add(cursor.getString(1));
 
-                myAdapter = new ArrayAdapter<>(
+                *//*myAdapter = new ArrayAdapter<>(
                         this, android.R.layout.simple_list_item_1, services);
-                myListView.setAdapter(myAdapter);
+                myListView.setAdapter(myAdapter);*//*
             }
         }
 
-    }
+    }*/
 
-       /* myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                *//*item = parent.getItemAtPosition(position).toString() + " has been selected";
-                indexVal = position;*//*
-                String text=myListView.getItemAtPosition(position).toString();
-                Toast.makeText(Services.this, ""+text, Toast.LENGTH_SHORT).show();
-            }
-        });*/
+
 
        /* updateValue.setOnClickListener(new View.OnClickListener() {
             @Override

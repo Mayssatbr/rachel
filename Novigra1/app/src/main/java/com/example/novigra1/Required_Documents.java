@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 public class Required_Documents extends AppCompatActivity {
     final String EXTRA_TEXT="com.example.novigra1.example.EXTRA_TEXT";
+    Toolbar toolbar;
     Button button,save;
     TextView textView;
     String[] listItems;
@@ -25,6 +27,11 @@ public class Required_Documents extends AppCompatActivity {
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
         setContentView(R.layout.required_documents);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!= null){
+            toolbar.setTitle(bundle.getString("servicename"));
+        }
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
         save = (Button) findViewById(R.id.save);
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
@@ -88,9 +95,8 @@ public class Required_Documents extends AppCompatActivity {
             public void onClick(View v) {
                 String text= textView.getText().toString();
                 Intent intent=new Intent(Required_Documents.this,Services.class);
-                intent.putExtra(EXTRA_TEXT,text);
+                intent.putExtra("documents",text);
                 startActivity(intent);
-                finish();
 
             }
         });
