@@ -80,6 +80,9 @@ public class Services extends AppCompatActivity {
                 }
             }
         });
+
+
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,10 +163,10 @@ public class Services extends AppCompatActivity {
 
     private void AddData(String serviceName) {
         OpenActivity();
-        String text = getIntent().getStringExtra("TEXT");
+        String text = getIntent().getStringExtra("text");
         documents.setText(text);
-        String ch = documents.getText().toString();
-        boolean insert = db.insertData(serviceName,ch);
+
+        boolean insert = db.insertData(serviceName,text);
         if (insert==true){
             Toast.makeText(Services.this, "Data added", Toast.LENGTH_LONG).show();
 
