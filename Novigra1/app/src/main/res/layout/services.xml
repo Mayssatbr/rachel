@@ -70,15 +70,14 @@
         android:layout_height="50dp"
         android:layout_below="@+id/Layoutspace3"
         android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/documents"
+        <Button
+            android:id="@+id/deleteButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="DELETE" />
 
-            android:textColor="#070707"
-            android:textSize="30dp" />
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -95,13 +94,34 @@
         android:layout_height="50dp"
         android:layout_below="@+id/Layoutspace4"
         android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/listView"
+        <TextView
+            android:id="@+id/documents"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/Layout4" />
+            android:layout_height="50dp"
+
+            android:textColor="#070707"
+            android:textSize="30dp" />
+
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/Layoutspace5"
+        android:layout_width="285dp"
+        android:layout_height="23dp"
+        android:layout_below="@+id/Layoutspace4"
+        android:layout_marginTop="76dp"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Layout5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/Layoutspace5"
+        android:orientation="vertical"/>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/Layout4" />
 
 
 </RelativeLayout>
