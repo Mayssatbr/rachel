@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 public class DatabaseHelper_Services extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "mylist.db";
     private static final String TABLE_NAME = "User_Table";
-    private static final String COL2 = "NAME";
+
     private static final String COL1 = "ID";
+    private static final String COL2 = "SERVICE";
+    private static final String COL3 = "DOCUMENT";
 
 
     public DatabaseHelper_Services(Context context) {
@@ -20,21 +22,20 @@ public class DatabaseHelper_Services extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + "(name TEXT primary key,documents TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +  "SERVICE TEXT, "+  "DOCUMENT TEXT)";
 
         sqLiteDatabase.execSQL(createTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("drop table if exists " + TABLE_NAME);
-        onCreate(sqLiteDatabase);
+        sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
     }
-    public boolean insertData(String name, String documents){
+    public boolean insertData(String service, String documents){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("documents", documents);
+        contentValues.put(COL2, service);
+        contentValues.put(COL3, documents);
 
         long result = db.insert(TABLE_NAME,null,contentValues);
         if(result == -1){

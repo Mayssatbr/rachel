@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //will create a table that has 2 columns (email and password)
         MyDB.execSQL("create Table user(email TEXT primary key, password TEXT)");
         MyDB.execSQL("insert into user values('Admin1234@gmail.com','admin1234')");
-        String createTable = "Create Table userServices(service TEXT primary key , documents TEXT)";
+        String createTable = "create Table userServices(service TEXT primary key , documents TEXT)";
         MyDB.execSQL(createTable);
 
 

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class Required_Documents extends AppCompatActivity {
-    final String EXTRA_TEXT="com.example.novigra1.example.EXTRA_TEXT";
+    final String EXTRA_TEXT="TEXT";
     Button button,save;
     TextView textView;
     String[] listItems;
@@ -88,9 +88,8 @@ public class Required_Documents extends AppCompatActivity {
             public void onClick(View v) {
                 String text= textView.getText().toString();
                 Intent intent=new Intent(Required_Documents.this,Services.class);
-                intent.putExtra(EXTRA_TEXT,text);
+                intent.putExtra("text",text);
                 startActivity(intent);
-                finish();
 
             }
         });
