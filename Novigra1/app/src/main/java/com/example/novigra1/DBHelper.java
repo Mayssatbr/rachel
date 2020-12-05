@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         // create the database
-        super(context, "Login.db",null, 1 );
+        super(context, "Novigradd.db",null, 1 );
     }
 
     @Override
@@ -21,8 +21,10 @@ public class DBHelper extends SQLiteOpenHelper {
         //will create a table that has 2 columns (email and password)
         MyDB.execSQL("create Table user(email TEXT primary key, password TEXT)");
         MyDB.execSQL("insert into user values('Admin1234@gmail.com','admin1234')");
-        String createTable = "create Table userServices(service TEXT primary key , documents TEXT)";
-        MyDB.execSQL(createTable);
+
+        MyDB.execSQL("create Table serviceList(service TEXT primary key, document TEXT)");
+
+
 
 
     }
@@ -30,8 +32,9 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int oldVersion, int newVersion) {
         MyDB.execSQL("drop Table if exists user");
-        MyDB.execSQL("drop table if exists userServices");
-        onCreate(MyDB);
+        MyDB.execSQL("drop Table if exists serviceList");
+
+
     }
     //inserer les donnees dans la base de donnee
     public Boolean insertData(String email, String password){
@@ -46,14 +49,14 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return true;
 
-
     }
+
     public boolean insertData_Services(String service, String documents){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("service",service);
-        contentValues.put("documents", documents);
-        long result = db.insert("userServices",null,contentValues);
+        contentValues.put("document", documents);
+        long result = db.insert("serviceList",null,contentValues);
         if(result == -1){
             return  false;
         }else{
@@ -66,9 +69,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public boolean deleteData(String service){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from userServices  where service = ?",new String[]{service});
+        Cursor cursor = db.rawQuery("Select * from serviceList  where service = ?",new String[] {service});
         if (cursor.getCount() > 0) {
-            long result = db.delete("userServices", "name=?", new String[]{service});
+            long result = db.delete("serviceList", "service=?", new String[] {service});
             if (result == -1) {
                 return false;
             } else {
@@ -81,8 +84,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public  Cursor viewData (){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from userServices ",null);
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+        String query = "Select * from serviceList";
+
+        Cursor cursor = null;
+        if(MyDB!=null){
+            cursor = MyDB.rawQuery(query,null);
+        }
         return cursor;
     }
 

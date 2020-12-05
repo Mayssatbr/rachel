@@ -3,6 +3,7 @@ package com.example.novigra1;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,9 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ComponentActivity;
 
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class Services extends AppCompatActivity {
 
     Integer indexVal;
     String item;
-    DatabaseHelper_Services db;
+    DBHelper db;
 
 
     @Override
@@ -45,7 +47,7 @@ public class Services extends AppCompatActivity {
         serviceInput = (EditText) findViewById(R.id.editServiceName);
         addValue = (Button) findViewById(R.id.addButton);
         delete = (Button) findViewById(R.id.deleteButton);
-        db = new DatabaseHelper_Services(this);
+        db = new DBHelper(this);
         myAdapter = new ArrayAdapter<String>(
                 Services.this, android.R.layout.simple_list_item_1, services);
 //        updateValue = (Button) findViewById(R.id.updateButton);
@@ -64,7 +66,7 @@ public class Services extends AppCompatActivity {
                 String serviceName;
                 serviceName = serviceInput.getText().toString();
 
-                if (serviceInput.length() != 0) {
+                if (serviceName.length() != 0) {
                     services.add(serviceName);
                     myListView.setAdapter(myAdapter);
 
@@ -121,16 +123,11 @@ public class Services extends AppCompatActivity {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(services.size()!=0) {
-                    for (int i = 0; i < services.size(); i++)
-                        AddService(myListView.getChildAt(i).toString());
-                }
-                else
-                {
-                    Toast.makeText(Services.this,"Nothing to show",Toast.LENGTH_SHORT).show();
-                    Toast.makeText(Services.this,"please press button add before",Toast.LENGTH_SHORT).show();
-                }
-
+                String serviceN;
+                Intent receivedIntent = getIntent();
+                serviceN = receivedIntent.getStringExtra("serviceName");
+                AddService(serviceN);
+                populateListView();
 
             }
         });
@@ -140,17 +137,19 @@ public class Services extends AppCompatActivity {
 
     }
     private void AddService(String serviceName) {
-        Bundle bundle = getIntent().getExtras();
-        String text=bundle.getString("documents");
+        String documentSelected;
+        Intent receivedIntent = getIntent();
+        documentSelected = receivedIntent.getStringExtra("documents");
+        boolean insert = db.insertData_Services(serviceName,documentSelected);
+        if (insert == true) {
+                Toast.makeText(Services.this, "Data added", Toast.LENGTH_LONG).show();
 
-        boolean insert = db.insertData(serviceName,text);
-        if (insert==true){
-            Toast.makeText(Services.this, "Data added", Toast.LENGTH_LONG).show();
 
-        }else{
-            Toast.makeText(Services.this, "Data not added", Toast.LENGTH_LONG).show();
+        } else {
+                Toast.makeText(Services.this, "Data not added", Toast.LENGTH_LONG).show();
 
         }
+
     }
 
    /* private void OpenActivity(){
@@ -217,6 +216,18 @@ public class Services extends AppCompatActivity {
                 return true;
             }
         });*/
+       public void populateListView(){
+
+           Cursor data = db.viewData();
+           while(data.moveToNext()){
+               //get the value of database in column 1
+               services.add(data.getString(0));
+           }
+           myAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,services);
+           myListView.setAdapter(myAdapter);
+
+
+       }
 
 
 }

@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toolbar;
+
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -30,11 +31,12 @@ public class Required_Documents extends AppCompatActivity {
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
         setContentView(R.layout.required_documents);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
         Bundle bundle = getIntent().getExtras();
         if(bundle!= null){
             toolbar.setTitle(bundle.getString("servicename"));
         }
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+
         save = (Button) findViewById(R.id.save);
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
@@ -97,10 +99,12 @@ public class Required_Documents extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String text= textView.getText().toString();
+                String name = toolbar.getTitle().toString();
                 Intent intent=new Intent(Required_Documents.this,Services.class);
 
                 intent.putExtra("documents",text);
-                intent.putExtra("text",text);
+                intent.putExtra("serviceName",name);
+
                 startActivity(intent);
 
             }
