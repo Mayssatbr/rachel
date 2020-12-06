@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-    private TextView Sign_up;
+    private TextView btSignupCustomer;
+    private TextView btSignupEmployee;
 
 
 
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin_client=(Button) findViewById(R.id.customerbt);
         btnLogin_employee=(Button) findViewById(R.id.employeebt);
         btn_Admin=(Button) findViewById(R.id.bt_Administrator);
-        Sign_up = (TextView) findViewById(R.id.sign_up);
+        btSignupCustomer=(Button) findViewById(R.id.customersp);
+        btSignupEmployee=(Button) findViewById(R.id.employeesp);
 
         DB = new DBHelper(this);
 
@@ -90,10 +92,18 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Sign_up.setOnClickListener(new View.OnClickListener() {
+        btSignupEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        btSignupCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Singup_Customer.class);
                 startActivity(intent);
 
             }
@@ -106,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 if(email.equals("")||pass.equals("")){
                     Toast.makeText(MainActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }else{
-                    Boolean checkemailpass = DB.checkEmilPassword(email,pass);
+                    Boolean checkemailpass = DB.checkAdmin(email,pass);
                     if(checkemailpass==true){
                         Toast.makeText(MainActivity.this,"Sign in Successfully",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),Admin_Options.class);

@@ -1,3 +1,4 @@
+/*
 package com.example.novigra1;
 
 import android.content.DialogInterface;
@@ -40,7 +41,6 @@ public class Required_Documents extends AppCompatActivity {
         save = (Button) findViewById(R.id.save);
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
-        listItems = getResources().getStringArray(R.array.documents);
         checkedItems = new boolean[listItems.length];
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -112,3 +112,4 @@ public class Required_Documents extends AppCompatActivity {
 
     }
 }
+*/

@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Novigra1">
+        <activity android:name=".Singup_Customer"></activity>
+        <activity android:name=".Add_succursales" />
+        <activity android:name=".Employee_Service" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,12 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Welcome_customer"></activity>
-        <activity android:name=".Welcome_employee"></activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".Admin_Options"></activity>
-        <activity android:name=".Services"></activity>
-        <activity android:name=".Required_Documents"></activity>
+        <activity android:name=".Welcome_customer" />
+        <activity android:name=".Welcome_employee" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".Admin_Options" />
+        <activity android:name=".Services" />
+        <activity android:name=".Required_Documents" />
     </application>
 
 </manifest>

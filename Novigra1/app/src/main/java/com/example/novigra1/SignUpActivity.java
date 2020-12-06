@@ -11,10 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText FirstName;
-    EditText LastName;
+    EditText FirstName,Username;
     EditText mail;
-    EditText userName;
+
     EditText password;
     TextView Sign_in;
 
@@ -36,9 +35,8 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.signup);
 
         FirstName = (EditText) findViewById(R.id.et_firstName);
-        LastName = (EditText) findViewById(R.id.et_lastName);
         mail = (EditText) findViewById(R.id.mail);
-        userName = (EditText) findViewById(R.id.et_usernameS);
+        Username = (EditText) findViewById(R.id.et_usernameS);
         password = (EditText) findViewById(R.id.et_password);
         SignUp = (Button) findViewById(R.id.signUp);
 
@@ -55,13 +53,14 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mail.getText().toString();
                 String pass = password.getText().toString();
+                String usname = Username.getText().toString();
                 if(email.equals("")||pass.equals("")){
                     Toast.makeText(SignUpActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Boolean checkemail = DB.checkEmail(email);
                     if(checkemail==false){
-                        Boolean insert = DB.insertData(email,pass);
+                        Boolean insert = DB.insertData(email,usname,pass);
                         if(insert==true){
                             Toast.makeText(SignUpActivity.this,"Registered successfully",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -36,7 +36,7 @@ public class Welcome_employee extends AppCompatActivity {
         services.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Welcome_employee.this,Services.class);
+                Intent intent=new Intent(Welcome_employee.this,Employee_Service.class);
                 startActivity(intent);
                 finish();
 

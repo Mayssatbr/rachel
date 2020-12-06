@@ -42,11 +42,21 @@
         android:layout_centerHorizontal="true"
         android:textAllCaps="false"
         android:textSize="20dp" />
+    <Button
+        android:id="@+id/newsuccursales"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="650dp"
+        android:text="Add_succursales"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
     <TextView
         android:id="@+id/logout"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="700dp"
         android:text="Logout"
         android:textStyle="bold"
         android:layout_marginLeft="140dp"

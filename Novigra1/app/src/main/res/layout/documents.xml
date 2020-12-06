@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/documenttext"
+        android:layout_width="293dp"
+        android:layout_height="286dp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="350dp"
+        android:hint="Enter the required documents" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="293dp"
+        android:layout_height="286dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+
+
+        android:text="TextView"
+         />
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="650dp"
+        android:layout_marginLeft="100dp"
+        android:text="CANCEL" />
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="650dp"
+        android:layout_marginLeft="200dp"
+        android:text="OK" />
+
+
+
+</RelativeLayout>

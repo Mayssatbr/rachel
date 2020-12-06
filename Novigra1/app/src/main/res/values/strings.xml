@@ -1,22 +1,3 @@
 <resources>
-    <string name="app_name">Novigra1</string>
-    <string name="Dialog_title">Service</string>
-    <string name="ok_label">OK</string>
-    <string name="Dismiss_label">Dismiss</string>
-    <string name="clear_all_label">Clear all</string>
-    <string-array name="documents">
-        <item>formulaire
-            <item>:nom</item>
-            <item>, prénom</item>
-            <item>, date de naissance</item>
-            <item>, adresse</item>
-            <item>, type de permis</item>
-        </item>
-        <item>document
-            <item>preuve de domicile</item>
-            <item>photo</item>
-            <item>preuve de statut</item>
-
-        </item>
-    </string-array>
+    <string name="app_name">Novigra 1</string>
 </resources>

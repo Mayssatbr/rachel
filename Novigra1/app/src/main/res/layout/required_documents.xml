@@ -40,7 +40,7 @@
         android:textColor="#070F3C"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:textSize="35dp"
+        android:textSize="25dp"
 
         />
 

@@ -58,12 +58,13 @@
         android:layout_height="50dp"
         android:layout_below="@+id/Layoutspace2"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/addButton"
+        <TextView
+            android:id="@+id/type"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:backgroundTint="#D85353"
-            android:text="ADD" />
+            android:layout_height="60dp"
+            android:ems="10"
+            />
+
 
     </LinearLayout>
 
@@ -80,14 +81,14 @@
         android:layout_height="50dp"
         android:layout_below="@+id/Layoutspace3"
         android:orientation="vertical">
-
         <Button
-            android:id="@+id/deleteButton"
+            android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="#D85353"
+            android:text="ADD" />
 
-            android:text="DELETE" />
+
 
     </LinearLayout>
     <LinearLayout
@@ -104,11 +105,12 @@
         android:layout_below="@+id/Layoutspace4"
         android:orientation="vertical">
         <Button
-            android:id="@+id/showButton"
+            android:id="@+id/deleteButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="#D85353"
-            android:text="SHOW" />
+
+            android:text="DELETE" />
 
 
     </LinearLayout>
@@ -133,20 +135,7 @@
             android:layout_below="@+id/Layout5"
             />
 
-    <LinearLayout
-        android:id="@+id/Layoutspace6"
-        android:layout_width="285dp"
-        android:layout_height="23dp"
-        android:layout_below="@+id/Layoutspace5"
-        android:layout_marginTop="76dp"
-        android:orientation="vertical"></LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Layout6"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/Layoutspace6"
-        android:orientation="vertical"/>
 
 
 

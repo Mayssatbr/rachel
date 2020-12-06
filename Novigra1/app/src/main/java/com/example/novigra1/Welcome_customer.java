@@ -13,6 +13,7 @@ public class Welcome_customer extends AppCompatActivity {
     TextView text;
     TextView logout;
     Button services;
+    EditText
 
 
 
