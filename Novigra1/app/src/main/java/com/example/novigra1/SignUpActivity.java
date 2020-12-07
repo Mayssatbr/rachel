@@ -11,11 +11,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText FirstName,Username;
+    EditText Username;
     EditText mail;
 
     EditText password;
     TextView Sign_in;
+    EditText horaire, adresse, type ,nom;
+
 
     DBHelper DB;
 
@@ -34,12 +36,15 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        FirstName = (EditText) findViewById(R.id.et_firstName);
+
         mail = (EditText) findViewById(R.id.mail);
-        Username = (EditText) findViewById(R.id.et_usernameS);
+        Username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.et_password);
         SignUp = (Button) findViewById(R.id.signUp);
-
+        horaire = (EditText) findViewById(R.id.horaire);
+        adresse = (EditText) findViewById(R.id.adresse);
+        type = (EditText) findViewById(R.id.typeService);
+        nom = (EditText) findViewById(R.id.nomsuccursale);
         DB = new DBHelper(this);
 
 
@@ -54,13 +59,17 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = mail.getText().toString();
                 String pass = password.getText().toString();
                 String usname = Username.getText().toString();
+                String time = horaire.getText().toString();
+                String address= adresse.getText().toString();
+                String typeSucc = type.getText().toString();
+                String name = nom.getText().toString();
                 if(email.equals("")||pass.equals("")){
                     Toast.makeText(SignUpActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Boolean checkemail = DB.checkEmail(email);
+                    Boolean checkemail = DB.checkEmailEmployee(email);
                     if(checkemail==false){
-                        Boolean insert = DB.insertData(email,usname,pass);
+                        Boolean insert = DB.insertData_Employee(usname,email,pass,name,time,address,typeSucc);
                         if(insert==true){
                             Toast.makeText(SignUpActivity.this,"Registered successfully",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

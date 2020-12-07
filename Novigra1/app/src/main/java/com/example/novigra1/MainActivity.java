@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 if(email.equals("")||pass.equals("")){
                     Toast.makeText(MainActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }else{
-                    Boolean checkemailpass = DB.checkEmilPassword(email,pass);
+                    Boolean checkemailpass = DB.checkEmailPasswordEmployee(email,pass);
                     if((checkemailpass==true)&&(email!="Admin1234@gmail.com")){
                         Toast.makeText(MainActivity.this,"Sign in Successfully",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),Welcome_employee.class);

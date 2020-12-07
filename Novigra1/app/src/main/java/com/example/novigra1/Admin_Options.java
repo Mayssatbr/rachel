@@ -31,7 +31,7 @@ public class Admin_Options extends AppCompatActivity {
         bt_succursales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Services.class);
+                Intent intent = new Intent(getApplicationContext(), Employee.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class Admin_Options extends AppCompatActivity {
         bt_clients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Services.class);
+                Intent intent = new Intent(getApplicationContext(), Client.class);
                 startActivity(intent);
             }
         });
