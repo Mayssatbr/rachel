@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/customersp"
-        android:text="submit as a customer"
+        android:text="sign up as customer"
         android:textColor="@android:color/white"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_button"/>
@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/employeesp"
-        android:text="submit as an employee"
+        android:text="sign up as employee"
         android:textColor="@android:color/white"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_button"/>

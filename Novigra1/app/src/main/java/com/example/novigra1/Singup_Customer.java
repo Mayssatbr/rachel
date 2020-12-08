@@ -47,7 +47,11 @@ public class Singup_Customer extends AppCompatActivity {
                 String passE = password.getText().toString();
                 String usnameE = Username.getText().toString();
 
-                if (emailE.equals("") || passE.equals("")) {
+                if (!emailE.matches(emailPattern)){
+                    mail.setError("Invalid Email");
+                }
+
+                if (emailE.equals("") || passE.equals("")||usnameE.equals("")) {
                     Toast.makeText(Singup_Customer.this, "Please Enter all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     Boolean checkemail = DB.checkEmail(emailE);

@@ -16,12 +16,14 @@ import java.util.ArrayList;
 
 public class SuccursaleAdapter extends RecyclerView.Adapter<SuccursaleAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList succursale,employee;
+    private ArrayList succursale,employee,time;
     Activity activity;
-    SuccursaleAdapter(Context context, ArrayList succursale, ArrayList employee){
+    SuccursaleAdapter(Activity activity,Context context, ArrayList succursale, ArrayList employee,ArrayList time){
+        this.activity = activity;
         this.context = context;
         this.succursale = succursale;
         this.employee = employee;
+        this.time = time;
 
     }
     @NonNull
@@ -37,12 +39,14 @@ public class SuccursaleAdapter extends RecyclerView.Adapter<SuccursaleAdapter.My
         // get the string from our Array and set the text
         holder.nameSuccursale.setText(String.valueOf(succursale.get(position)));
         holder.nameEmployee.setText(String.valueOf(employee.get(position)));
+        holder.timeSuccursale.setText(String.valueOf(time.get(position)));
+
 
         holder.EmployeeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,DeleteData.class);
-                intent.putExtra("username", String.valueOf(succursale.get(position)));
+                Intent intent = new Intent(context,DeleteSuccursale.class);
+                intent.putExtra("employee", String.valueOf(employee.get(position)));
                 activity.startActivityForResult(intent,1);
 
             }
@@ -56,8 +60,8 @@ public class SuccursaleAdapter extends RecyclerView.Adapter<SuccursaleAdapter.My
     }
 
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView nameSuccursale, nameEmployee;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView nameSuccursale, nameEmployee,timeSuccursale;
             LinearLayout EmployeeLayout;
 
             public MyViewHolder(@NonNull View itemView) {
@@ -65,9 +69,10 @@ public class SuccursaleAdapter extends RecyclerView.Adapter<SuccursaleAdapter.My
                 //get id of TextView
                 nameSuccursale = itemView.findViewById(R.id.SuccName);
                 nameEmployee = itemView.findViewById(R.id.EmployeeName);
+                timeSuccursale = itemView.findViewById(R.id.SuccTime);
                 EmployeeLayout = itemView.findViewById(R.id.EmployeeLayout);
 
             }
-        }
+    }
 
 }

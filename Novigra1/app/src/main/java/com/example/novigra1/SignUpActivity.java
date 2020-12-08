@@ -1,34 +1,35 @@
 package com.example.novigra1;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText Username;
-    EditText mail;
 
-    EditText password;
     TextView Sign_in;
-    EditText horaire, adresse, type ,nom;
+    EditText Username, mail, star,end,password, adresse, type ,nom;
+
+    TimePickerDialog timePickerDialog;
 
 
     DBHelper DB;
-
     Button SignUp;
+
+    String ampm;
 
 
 
 
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    private Intent intent;
 
 
     @Override
@@ -41,7 +42,8 @@ public class SignUpActivity extends AppCompatActivity {
         Username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.et_password);
         SignUp = (Button) findViewById(R.id.signUp);
-        horaire = (EditText) findViewById(R.id.horaire);
+        star = (EditText) findViewById(R.id.startTime);
+        end = (EditText) findViewById(R.id.endTime);
         adresse = (EditText) findViewById(R.id.adresse);
         type = (EditText) findViewById(R.id.typeService);
         nom = (EditText) findViewById(R.id.nomsuccursale);
@@ -49,6 +51,42 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         Sign_in = (TextView) findViewById(R.id.sign_in);
+
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePickerDialog = new TimePickerDialog(SignUpActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        if(hourOfDay>=12){
+                            ampm = "PM";
+                        }else{
+                            ampm = "AM";
+                        }
+                        star.setText(String.format("%02d:%02d", hourOfDay, minute) + ampm);
+                    }
+                },0,0,false);
+                timePickerDialog.show();
+            }
+        });
+
+        end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePickerDialog = new TimePickerDialog(SignUpActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        if(hourOfDay>=12){
+                            ampm = "PM";
+                        }else{
+                            ampm = "AM";
+                        }
+                        end.setText(String.format("%02d:%02d", hourOfDay, minute) + ampm);
+                    }
+                },0,0,false);
+                timePickerDialog.show();
+            }
+        });
 
 
 
@@ -59,10 +97,13 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = mail.getText().toString();
                 String pass = password.getText().toString();
                 String usname = Username.getText().toString();
-                String time = horaire.getText().toString();
+                String time = "Monday to Saturday from "+star.getText().toString()+" to "+end.getText().toString();
                 String address= adresse.getText().toString();
                 String typeSucc = type.getText().toString();
                 String name = nom.getText().toString();
+                if (!email.matches(emailPattern)){
+                    mail.setError("Invalid Email");
+                }
                 if(email.equals("")||pass.equals("")){
                     Toast.makeText(SignUpActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
                 }

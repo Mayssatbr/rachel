@@ -152,12 +152,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     }
-    public Boolean deleteEmployee(String username){
+    public Boolean deleteEmployee(String employee){
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from EmployeeAccount where username = ?", new String[] {username});
+        Cursor cursor = MyDB.rawQuery("Select * from EmployeeAccount where username = ?", new String[] {employee});
 
         if(cursor.getCount()>0) {
-            long result = MyDB.delete("EmployeeAccount","username=?", new String[] {username});
+            long result = MyDB.delete("EmployeeAccount","username=?", new String[] {employee});
             if (result == -1) {
                 return false;
             }
